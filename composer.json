@@ -1,7 +1,23 @@
 {
-    "name": "dimti/switchcircle-plugin",
+    "name": "dimti/oc-listextend-plugin",
     "type": "october-plugin",
-    "description": "No description provided yet...",
+    "description": "Additional backend list columns",
+    "keywords": [
+        "october",
+        "cms",
+        "list",
+        "backend",
+        "columns",
+        "edit",
+        "plugin"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Demidov",
+            "email": "demidov@dimti.ru"
+        }
+    ],
     "require": {
         "composer/installers": "~1.0"
     }
