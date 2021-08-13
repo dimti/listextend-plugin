@@ -21,8 +21,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'switchcircle',
-            'description' => 'No description provided yet...',
+            'name'        => 'listextend',
+            'description' => 'Additional backend list columns',
             'author'      => 'dimti',
             'icon'        => 'icon-leaf'
         ];
@@ -72,7 +72,7 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'dimti.switchcircle.some_permission' => [
+            'dimti.listextend.some_permission' => [
                 'tab' => 'switchcircle',
                 'label' => 'Some permission'
             ],
@@ -89,11 +89,11 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'switchcircle' => [
-                'label'       => 'switchcircle',
-                'url'         => Backend::url('dimti/switchcircle/mycontroller'),
+            'listextend' => [
+                'label'       => 'listextend',
+                'url'         => Backend::url('dimti/listextend/mycontroller'),
                 'icon'        => 'icon-leaf',
-                'permissions' => ['dimti.switchcircle.*'],
+                'permissions' => ['dimti.listextend.*'],
                 'order'       => 500,
             ],
         ];
