@@ -1,5 +1,5 @@
 {
-    "name": "dimti/oc-listextend-plugin",
+    "name": "dimti/listextend-plugin",
     "type": "october-plugin",
     "description": "Additional backend list columns",
     "keywords": [
