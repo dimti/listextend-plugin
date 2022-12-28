@@ -12,14 +12,40 @@ trait ExtendListColumns
     {
         return [
             'switchcircle' => function ($value, ListColumn $column, Model $record) {
-                $onclick = ' onclick="event.stopPropagation();$(this).request(\'onEditable\');"' .
-                    ' data-request-data="id: ' . $record->id . ', columnName: \'' . $column->columnName . '\', type: \'switchcircle\', fieldModelClass: \'' . str_replace('\\','.', get_class($record)) . '\'"' .
-                    ' data-current-value="' . $record->{$column->columnName} . '"' .
-                    ' data-request-success="var $el=$(this);var v=parseInt($el.attr(\'data-current-value\'));$el.attr(\'data-current-value\', v ? 0 : 1);$el.removeClass(\'icon-circle\').removeClass(\'icon-circle-o\').addClass(\'icon-circle\' + (!v ? \'\' : \'-o\'))"';
+                $emptyClass = 'icon-circle-o';
 
-                $class = $value ? 'icon-circle' : 'icon-circle-o';
+                $filledClass = 'icon-circle';
 
-                $contents = '<i class="' . $class . '" title="' . $value . '" ' . $onclick . '></i>';
+                $onclick = sprintf(
+                    <<<EOF
+onclick="event.stopPropagation();$(this).request('onEditable');"
+data-request-data="id: %d, columnName: '%s', type: 'switchcircle', fieldModelClass: '%s'"
+data-current-value="%s"
+data-request-success="%s %s %s %s"
+EOF,
+                    $record->id,
+                    $column->columnName,
+                    str_replace('\\','.', get_class($record)),
+                    $record->{$column->columnName},
+                    sprintf(
+                        "emptyClass = '%s'; filledClass = '%s';",
+                        $emptyClass,
+                        $filledClass
+                    ),
+                    "el = $(this); el.removeClass(emptyClass).removeClass(filledClass);",
+                    "iconClass = data.newValue ? filledClass : emptyClass;",
+                    "el.attr('data-current-value', !!data.newValue); el.addClass(iconClass);"
+                )
+                ;
+
+                $class = $value ? $filledClass : $emptyClass;
+
+                $contents = sprintf(
+                    '<i class="%s" title="%s" %s></i>',
+                    $class,
+                    $value,
+                    $onclick
+                );
 
                 return $contents;
             },

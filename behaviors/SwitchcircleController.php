@@ -40,13 +40,20 @@ class SwitchcircleController extends ControllerBehavior
 
                     $pivotModel = $relatedModel->pivot;
 
-                    $pivotModel->setAttribute($columnNameInPivot, !$pivotModel->$columnNameInPivot);
+                    $newValue = !$pivotModel->$columnNameInPivot;
+
+                    $pivotModel->setAttribute($columnNameInPivot, $newValue);
 
                     $pivotModel->save();
                 } else {
-                    $model->setAttribute($columnName, !$model->$columnName)->save();
+                    $newValue = !$model->$columnName;
+
+                    $model->setAttribute($columnName, $newValue)->save();
                 }
-                break;
+
+                return [
+                    'newValue' => $newValue,
+                ];
         }
     }
 }
